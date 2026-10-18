@@ -38,7 +38,7 @@ public class ItemController {
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeItem(@RequestHeader("X-Sharer-User-Id") Long userId, @PathVariable long id) {
+    public void removeItem(@RequestHeader("X-Sharer-User-Id") Long userId, @PathVariable Long id) {
         itemService.removeItem(userId, id);
     }
 

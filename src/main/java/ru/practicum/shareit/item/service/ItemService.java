@@ -28,7 +28,7 @@ public class ItemService {
         this.userRepository = userRepository;
     }
 
-    public ItemDto createItem(Long ownerId, ItemDto itemDto) {
+    public ItemDto createItem(long ownerId, ItemDto itemDto) {
         User user = userRepository.findUserById(ownerId);
         if (user == null) {
             throw new NotFoundException("Нельзя добавить вещь для несуществующего пользователя");
@@ -44,13 +44,13 @@ public class ItemService {
         return ItemMapper.mapToItemDto(item);
     }
 
-    public ItemDto patchItem(Long ownerId, Long id, Map<String,Object> updates) {
+    public ItemDto patchItem(long ownerId, long id, Map<String,Object> updates) {
         Item item = itemRepository.findItemById(id);
 
         if (item == null) {
             throw new NotFoundException("Вещь не найдена с ID: " + id);
         }
-        if (item.getOwner().getId() != ownerId) {
+        if (item.getOwner().getId().equals(ownerId)) {
             throw new NotFoundException("Пользователь может изменять только свои вещи");
         }
 
@@ -70,7 +70,7 @@ public class ItemService {
         return ItemMapper.mapToItemDto(item);
     }
 
-    public ItemDto getItemById(Long itemid) {
+    public ItemDto getItemById(long itemid) {
         Item item = itemRepository.findItemById(itemid);
         if (item == null) {
             throw new NotFoundException("Вещь не найдена с ID: " + itemid);
@@ -79,18 +79,18 @@ public class ItemService {
         return ItemMapper.mapToItemDto(item);
     }
 
-    public void removeItem(Long ownerId, Long itemid) {
+    public void removeItem(long ownerId, long itemid) {
         Item item = itemRepository.findItemById(itemid);
         if (item == null) {
             throw new NotFoundException("Вещь не найдена с ID: " + itemid);
         }
-        if (item.getOwner().getId() != ownerId) {
+        if (item.getOwner().getId().equals(ownerId)) {
             throw new NotFoundException("Пользователь может удалять только свои вещи");
         }
         itemRepository.removeItem(itemid);
     }
 
-    public List<ItemDto> getItems(Long ownerId) {
+    public List<ItemDto> getItems(long ownerId) {
         return ItemMapper.mapToItemDtoList(itemRepository.findItemByOwner(ownerId));
     }
 
