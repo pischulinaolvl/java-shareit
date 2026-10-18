@@ -30,12 +30,12 @@ public class JdbcItemRepository  implements ItemRepository {
         params.addValue("name", item.getName());
         params.addValue("description", item.getDescription());
         params.addValue("available", item.isAvailable());
-        if (item.getOwner()!=null) {
+        if (item.getOwner() != null) {
             params.addValue("owner", item.getOwner().getId());
         } else {
             params.addValue("owner", null);
         }
-        if (item.getItemRequest()!=null) {
+        if (item.getItemRequest() != null) {
             params.addValue("request", item.getItemRequest().getId());
         } else {
             params.addValue("request", null);

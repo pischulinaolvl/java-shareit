@@ -2,7 +2,6 @@ package ru.practicum.shareit.request.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
 import ru.practicum.shareit.request.dto.ItemRequestRow;
-import ru.practicum.shareit.request.model.ItemRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
