@@ -50,7 +50,7 @@ public class ItemService {
         if (item == null) {
             throw new NotFoundException("Вещь не найдена с ID: " + id);
         }
-        if (item.getOwner().getId().equals(ownerId)) {
+        if (!item.getOwner().getId().equals(ownerId)) {
             throw new NotFoundException("Пользователь может изменять только свои вещи");
         }
 
@@ -84,7 +84,7 @@ public class ItemService {
         if (item == null) {
             throw new NotFoundException("Вещь не найдена с ID: " + itemid);
         }
-        if (item.getOwner().getId().equals(ownerId)) {
+        if (!item.getOwner().getId().equals(ownerId)) {
             throw new NotFoundException("Пользователь может удалять только свои вещи");
         }
         itemRepository.removeItem(itemid);
